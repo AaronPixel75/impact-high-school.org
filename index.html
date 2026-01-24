@@ -16,6 +16,15 @@
             --text: #333;
         }
 
+        body.dark {
+            --primary: #4A90E2;
+            --secondary: #F39C12;
+            --accent: #34495E;
+            --dark: #1A1A1A;
+            --light: #2C2C2C;
+            --text: #E0E0E0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -102,6 +111,21 @@
 
         .nav-link:hover::after {
             width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         /* Hero Section */
@@ -492,6 +516,7 @@
                 Contact
             </a>
         </div>
+            <button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
             <i class="fas fa-bars hamburger"></i>
         </nav>
     </header>
@@ -711,6 +736,20 @@
 
     // Dynamic Year Update
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const theme = document.body.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
+        themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
 </script>
 
 </html>
