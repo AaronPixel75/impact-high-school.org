@@ -261,32 +261,38 @@
             padding: 6rem 2rem;
             background: var(--dark);
             color:white;
-            overflow: hidden;
         }
 
         .stats-grid {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
-            animation: slide 20s linear infinite;
-        }
-
-        @keyframes slide {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .stat-item {
-            flex: 0 0 250px;
             text-align: center;
             color:var(--accent);
             padding: 2rem;
             background: rgba(255,255,255,1);
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.2s; }
+        .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .stat-item:nth-child(3) { animation-delay: 0.6s; }
+        .stat-item:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .stat-number {
@@ -556,23 +562,6 @@
 
     <section class="stats">
         <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">98%</div>
-                <div>Admission Acceptance</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">50+</div>
-                <div>Cocurricular Programs and Clubs</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">1000</div>
-                <div>Student population</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">35</div>
-                <div>Awards in All Different Competitions</div>
-            </div>
-            <!-- Duplicate for continuous slide -->
             <div class="stat-item">
                 <div class="stat-number">98%</div>
                 <div>Admission Acceptance</div>
