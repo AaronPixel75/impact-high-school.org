@@ -261,17 +261,26 @@
             padding: 6rem 2rem;
             background: var(--dark);
             color:white;
+            overflow: hidden;
         }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
             gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         .stat-item {
+            flex: 0 0 250px;
             text-align: center;
             color:var(--accent);
             padding: 2rem;
@@ -547,6 +556,23 @@
 
     <section class="stats">
         <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div>Admission Acceptance</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div>Cocurricular Programs and Clubs</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000</div>
+                <div>Student population</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">35</div>
+                <div>Awards in All Different Competitions</div>
+            </div>
+            <!-- Duplicate for continuous slide -->
             <div class="stat-item">
                 <div class="stat-number">98%</div>
                 <div>Admission Acceptance</div>
