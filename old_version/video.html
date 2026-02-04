@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour - Impact High School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+    <style>
+        :root {
+            --primary: #2A5C82;
+            --secondary: #F5A623;
+            --accent:#1A2B3C ;
+            --dark:  #065f46;
+            --light: white;
+            --text: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+     .header 
+        {
+            background: var(--dark);
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo:hover .logo-text::after {
+            transform: scaleX(1);
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+
+        /* Video Section */
+        .video-section {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .video-description {
+            margin-top: 2rem;
+            color: white;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        /* Footer */
+       .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+       @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-nav {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                background: var(--dark);
+                flex-direction: column;
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.3s ease;
+            }
+
+            .main-nav.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .hamburger.active {
+                transform: rotate(90deg);
+            }
+        }
+         @media (max-width: 768px) {
+            .nav-container {
+                height: 80px;
+                padding: 0 1.5rem;
+            }
+    
+            .logo img {
+                height: 60px;
+            }
+    
+            .main-nav {
+                top: 80px;
+                backdrop-filter: blur(15px);
+                
+                padding: 2rem 1.5rem;
+            }
+    
+            .nav-link {
+                padding: 1rem 0;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+
+    <!-- Chatbot Styles -->
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        #chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        #chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        #chatbot-toggle i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        #chatbot-window {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chatbot-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chatbot-header span {
+            font-weight: 600;
+        }
+
+        #chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        #chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .chatbot-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .chatbot-message.user {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chatbot-message.bot {
+            background: white;
+            color: var(--text);
+            border: 1px solid #e9ecef;
+        }
+
+        #chatbot-input-area {
+            display: flex;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+
+        #chatbot-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e9ecef;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        #chatbot-send {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #chatbot-send:hover {
+            background: var(--dark);
+        }
+    </style>
+</head>
+<body>
+     <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="pics/impactt.png" alt="Impact High School Logo">
+                <span class="logo-text">Impact High School</span>
+            </a>
+           <div class="main-nav">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="about.html" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+                About
+            </a>
+            <a href="academics.html" class="nav-link">
+                <i class="fas fa-book-open"></i>
+                Academics
+            </a>
+            <a href="gallery.html" class="nav-link">
+                <i class="fas fa-file-signature"></i>
+                Gallery
+            </a>
+            <a href="contact.html" class="nav-link">
+                <i class="fas fa-phone-alt"></i>
+                Contact
+            </a>
+        </div>
+            <i class="fas fa-bars hamburger"></i>
+        </nav>
+    </header>
+
+    <section class="video-section">
+        <div class="video-container">
+            <video src="pics/Impact Our mother theme song for 2024 By Impact School choir.mp4" controls style="width: 100%; height: 600px;"></video>
+            <div class="video-description">
+                <p>Watch our school theme song video for 2024 by the Impact School choir.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Location: P.O. BOX 23, Lugazi Municipality, Buikwe District, Uganda (Kampala region).<br>
+                Physical Address: The school is located along the Lugazi - Namengo Road.<br>
+                Phone Numbers: 075 830 5469<br>
+                Email: info@impacthighschoolug.com<br>
+                Office Hours: Mon-Fri 8AM-5PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="video.html">Virtual Tour</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Impact-high-school-lugazi-100064060272255/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/impact_high_school_lugazi/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://ug.linkedin.com/company/impact-high-school-lugazi"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/watch?v=IFVZ60-DcK4"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle from index.html
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('.main-nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget">
+        <div id="chatbot-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div id="chatbot-window">
+            <div id="chatbot-header">
+                <span>Impact High School Assistant</span>
+                <button id="chatbot-close">&times;</button>
+            </div>
+            <div id="chatbot-messages"></div>
+            <div id="chatbot-input-area">
+                <input type="text" id="chatbot-input" placeholder="Ask me anything about the school...">
+                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+
+        function addMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chatbot-message', sender);
+            messageDiv.textContent = message;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        async function getAIResponse(message) {
+            try {
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer sk-42b68022812149f98af85d4b9341e224'
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: 'You are an assistant for Impact High School. Provide helpful information about the school. Key info: Location: P.O. BOX 23, Lugazi Municipality, Buikwe District, Uganda, along Lugazi-Namengo Road. Phone: 075 830 5469. Email: info@impacthighschoolug.com. Vision: Develop confident young people for independent learning. Mission: World-class education with spiritual values. Programmes: O-Level and A-Level secondary education. Be friendly and informative.'
+                            },
+                            { role: 'user', content: message }
+                        ],
+                        max_tokens: 200
+                    })
+                });
+                const data = await response.json();
+                if (data.choices && data.choices[0]) {
+                    return data.choices[0].message.content;
+                } else {
+                    return 'Sorry, I couldn\'t generate a response right now. Please try again.';
+                }
+            } catch (error) {
+                console.error('API Error:', error);
+                return 'Sorry, I\'m having trouble connecting right now. Please try again later.';
+            }
+        }
+
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWindow.style.display = chatbotWindow.style.display === 'block' ? 'none' : 'block';
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbotWindow.style.display = 'none';
+        });
+
+        chatbotSend.addEventListener('click', async () => {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                chatbotInput.value = '';
+                chatbotInput.disabled = true;
+                chatbotSend.disabled = true;
+                const response = await getAIResponse(message);
+                addMessage(response, 'bot');
+                chatbotInput.disabled = false;
+                chatbotSend.disabled = false;
+            }
+        });
+
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                chatbotSend.click();
+            }
+        });
+
+        // Initial greeting
+        setTimeout(() => addMessage('Hello! I\'m the Impact High School assistant. How can I help you today?', 'bot'), 1000);
+    </script>
+
+<script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+<zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cmks0upgf002irzj2km2b9cpo'></zapier-interfaces-chatbot-embed>
+
+</body>
+</html>  
