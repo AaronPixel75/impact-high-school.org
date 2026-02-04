@@ -1,209 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academics - Impact High School</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Existing styles from index.html */
-        :root {
-            --primary: #2A5C82;
-            --secondary: #F5A623;
-            --accent:#1A2B3C ;
-            --dark: #065f46;
-            --light: white;
-            --text: #333;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background: var(--light);
-            overflow-x: hidden;
-        }
-
-        /* Header Styles */
-        .header 
-        {
-            background: var(--dark);
-            position: sticky;
-            top: 0;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
-            
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-        }
-
-        .logo img {
-            height: 100px;
-            width: auto;
-        }
-
-        .logo-text {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .logo:hover .logo-text::after {
-            transform: scaleX(1);
-        }
-
-        /* Main Navigation */
-        .main-nav {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            position: relative;
-            padding: 0.5rem 0;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Academics Hero Section */
         .academics-hero {
             min-height: 60vh;
-            background: linear-gradient(rgba(12,9,9,0.9), rgba(12,9,9,0.3)),
-                        url('pics/academics-bg.jpg') center/cover;
+            background: linear-gradient(rgba(6, 95, 70, 0.9), rgba(42, 92, 130, 0.7)),
+                url('pics/academics-bg.jpg') center/cover;
             display: flex;
             align-items: center;
+            justify-content: center;
             color: white;
             padding: 4rem 2rem;
             position: relative;
+            text-align: center;
         }
 
         .academics-hero::after {
+            /* Fallback background if image missing */
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 150px;
-            background: linear-gradient(to bottom, transparent, #f9f9f9);
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            z-index: -1;
         }
 
-        .academics-hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-            animation: float 3s ease-in-out infinite;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .academics-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Curriculum Section */
-        .curriculum {
+        .curriculum,
+        .programmes,
+        .faculty,
+        .calendar {
             padding: 6rem 2rem;
-            background: #f9f9f9;
         }
 
-        .subject-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .subject-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .subject-icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        /* Programmes Section */
         .programmes {
-            padding: 6rem 2rem;
             background: var(--light);
         }
 
-        .programmes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+        .faculty {
+            background: var(--white);
         }
 
+        .calendar {
+            background: var(--dark);
+            color: white;
+        }
+
+        .subject-card,
         .programme-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            text-align: center;
         }
 
+        .subject-card:hover,
         .programme-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .subject-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
         }
 
         .programme-card h3 {
@@ -211,328 +84,400 @@
             margin-bottom: 1rem;
         }
 
-        .programme-card p {
-            color: var(--text);
-        }
-
-        /* Faculty Section */
-        .faculty {
-            padding: 6rem 2rem;
-        }
-
-        .faculty-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
         .faculty-card {
             text-align: center;
             padding: 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .faculty-card:hover {
+            background: var(--light);
         }
 
         .faculty-img {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 1rem;
-            border: 3px solid var(--secondary);
-        }
-
-        /* Academic Calendar */
-        .calendar {
-            padding: 6rem 2rem;
-            background: var(--dark);
-            color: white;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--secondary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .calendar-table {
             width: 100%;
             max-width: 1000px;
-            margin: 2rem auto;
-            border-collapse: collapse;
+            margin: 3rem auto 0;
+            border-collapse: separate;
+            border-spacing: 0 1rem;
         }
 
-        .calendar-table th,
-        .calendar-table td {
-            padding: 1rem;
-            border: 1px solid rgba(255,255,255,0.1);
+        .calendar-table th {
             text-align: left;
-        }
-
-        /* Existing Footer Styles from index.html */
-         .footer {
-            background: var(--dark);
-            color: white;
-            padding: 4rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-        }
-
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
+            padding: 1rem 1.5rem;
             color: var(--secondary);
-            padding-left: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+        .calendar-table td {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            vertical-align: middle;
         }
 
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+        .calendar-table tr td:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            font-weight: 700;
+            color: var(--secondary);
         }
 
-        .social-links a:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
+        .calendar-table tr td:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            .calendar-table th {
+                display: none;
             }
 
-            .main-nav {
-                position: fixed;
-                top: 80px;
-                right: -100%;
-                background: var(--dark);
-                flex-direction: column;
-                width: 100%;
-                padding: 2rem;
-                transition: right 0.3s ease;
-            }
-
-            .main-nav.active {
-                right: 0;
-            }
-
-            .hamburger {
+            .calendar-table tr {
                 display: block;
-                color: white;
-                font-size: 1.5rem;
-                cursor: pointer;
-                transition: transform 0.3s ease;
+                margin-bottom: 1.5rem;
             }
 
-            .hamburger.active {
-                transform: rotate(90deg);
+            .calendar-table td {
+                display: block;
+                padding: 0.8rem 1.5rem;
+                border-radius: 0 !important;
             }
-        }
-         @media (max-width: 768px) {
-            .nav-container {
-                height: 80px;
-                padding: 0 1.5rem;
+
+            .calendar-table tr td:first-child {
+                border-top-left-radius: 10px !important;
+                border-top-right-radius: 10px !important;
+                background: rgba(255, 255, 255, 0.1);
             }
-    
-            .logo img {
-                height: 60px;
-            }
-    
-            .main-nav {
-                top: 80px;
-                backdrop-filter: blur(15px);
-                
-                padding: 2rem 1.5rem;
-            }
-    
-            .nav-link {
-                padding: 1rem 0;
-                font-size: 1.1rem;
+
+            .calendar-table tr td:last-child {
+                border-bottom-left-radius: 10px !important;
+                border-bottom-right-radius: 10px !important;
             }
         }
     </style>
 </head>
+
 <body>
-     <header class="header">
+    <header class="header">
         <nav class="nav-container">
             <a href="index.html" class="logo">
                 <img src="pics/impactt.png" alt="Impact High School Logo">
                 <span class="logo-text">Impact High School</span>
             </a>
-           <div class="main-nav">
-            <a href="index.html" class="nav-link">
-                <i class="fas fa-home"></i>
-                Home
-            </a>
-            <a href="about.html" class="nav-link">
-                <i class="fas fa-info-circle"></i>
-                About
-            </a>
-            <a href="academics.html" class="nav-link">
-                <i class="fas fa-book-open"></i>
-                Academics
-            </a>
-            <a href="gallery.html" class="nav-link">
-                <i class="fas fa-file-signature"></i>
-                Gallery
-            </a>
-            <a href="contact.html" class="nav-link">
-                <i class="fas fa-phone-alt"></i>
-                Contact
-            </a>
-        </div>
-            <i class="fas fa-bars hamburger"></i>
+            <div class="main-nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    About
+                </a>
+                <a href="academics.html" class="nav-link active">
+                    <i class="fas fa-book-open"></i>
+                    Academics
+                </a>
+                <a href="gallery.html" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    Gallery
+                </a>
+                <a href="learning-hub.html" class="nav-link">
+                    <i class="fas fa-brain"></i>
+                    AI Tutor
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-phone-alt"></i>
+                    Contact
+                </a>
+            </div>
+            <i class="fas fa-bars hamburger" role="button" aria-label="Toggle navigation" tabindex="0"></i>
         </nav>
     </header>
 
-    <section class="academics-hero">
-        <div class="academics-hero-content">
-            <h1>Excellence in Education</h1>
-            <p>Developing critical thinkers and lifelong learners through our comprehensive curriculum</p>
-        </div>
-    </section>
+    <main>
+        <section class="academics-hero">
+            <div class="container">
+                <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Excellence in Education</h1>
+                <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; opacity: 0.9;">Developing critical
+                    thinkers and lifelong learners through our comprehensive curriculum</p>
+            </div>
+        </section>
 
-    <section class="curriculum">
-        <div class="section-title">
-            <h2 style='text-align:center;'>Our Curriculum</h2>
-            <p  style='text-align:center;'>A balanced approach to academic and personal development</p>
-        </div>
-        <div class="subject-grid">
-            <div class="subject-card">
-                <i class="fas fa-science subject-icon"></i>
-                <h3>STEM Program</h3>
-                <p>Advanced courses in Science, Technology, Engineering, and Mathematics with state-of-the-art labs</p>
-            </div>
-            <div class="subject-card">
-                <i class="fas fa-paint-brush subject-icon"></i>
-                <h3>Arts & Humanities</h3>
-                <p>Creative arts, literature, history, and social sciences programs fostering critical thinking</p>
-            </div>
-            <div class="subject-card">
-                <i class="fas fa-globe subject-icon"></i>
-                <h3>World Languages</h3>
-                <p>French, Spanish, and Mandarin programs with cultural immersion opportunities</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="programmes">
-        <div class="section-title">
-            <h2 style='text-align:center;'>Our Programmes</h2>
-            <p  style='text-align:center;'>Comprehensive secondary education focused on excellence and values</p>
-        </div>
-        <div class="programmes-grid">
-            <div class="programme-card">
-                <h3>Secondary Education</h3>
-                <p>Both Ordinary Level and Advanced Level classes providing a strong foundation for higher education.</p>
+        <!-- Academic Achievements Counter -->
+        <!-- Clean Stats Section (Floating) -->
+        <section class="academic-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item-clean">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">First Grades</span>
+                    </div>
+                    <div class="stat-item-clean">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">University Entry</span>
+                    </div>
+                    <div class="stat-item-clean">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Annual Scholarships</span>
+                    </div>
+                    <div class="stat-item-clean">
+                        <span class="stat-number">1:15</span>
+                        <span class="stat-label">Teacher Ratio</span>
+                    </div>
+                </div>
             </div>
-            <div class="programme-card">
-                <h3>Ethical Academic Studies</h3>
-                <p>Academic studies grounded in ethical values, promoting integrity and moral development.</p>
-            </div>
-            <div class="programme-card">
-                <h3>Character Development</h3>
-                <p>Emphasis on character development, responsible citizenship, and preparing learners for 21st century challenges.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="faculty">
-        <div class="section-title">
-            <h2 style='text-align:center;'>Our Faculty</h2>
-            <p  style='text-align:center;'>Dedicated professionals shaping young minds</p>
-        </div>
-        <div class="faculty-grid">
-            <div class="faculty-card">
-                <img src="pics/1728209172390.jpeg" alt="Dr. Sarah Johnson" class="faculty-img">
-                <h3>Dr. Sarah Johnson</h3>
-                <p>Head of Science Department<br>PhD in Physics</p>
-            </div>
-            <div class="faculty-card">
-                <img src="pics/1728209172390.jpeg" alt="Mr. James Okello" class="faculty-img">
-                <h3>Mr. James Okello</h3>
-                <p>Mathematics Coordinator<br>MSc in Applied Mathematics</p>
-            </div>
-            <div class="faculty-card">
-                <img src="pics/1728209172390.jpeg" alt="Ms. Amina Nalwoga" class="faculty-img">
-                <h3>Ms. Amina Nalwoga</h3>
-                <p>Head of Languages<br>MA in Linguistics</p>
-            </div>
-        </div>
-    </section>
+        <!-- NEW: Learning Pathway (Vertical Journey) -->
+        <section class="pathway-section" style="padding: 4rem 0 8rem; background: #fff;">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Your Path to Excellence</h2>
+                    <p>A structured journey from enrollment to graduation</p>
+                </div>
 
-    <section class="calendar">
-        <div class="section-title">
-            <h2>Academic Calendar 2024</h2>
-            <p>Key dates and important events</p>
-        </div>
-        <table class="calendar-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Event</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Jan 15</td>
-                    <td>First Term Begins</td>
-                    <td>Orientation for new students</td>
-                </tr>
-                <tr>
-                    <td>Mar 20-22</td>
-                    <td>Mid-Term Exams</td>
-                    <td>All subjects assessment</td>
-                </tr>
-                <tr>
-                    <td>Apr 5-15</td>
-                    <td>Sports Week</td>
-                    <td>Inter-house competitions</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+                <div class="learning-pathway">
+                    <!-- Step 1 -->
+                    <div class="pathway-step">
+                        <div class="pathway-content">
+                            <h3>Foundation (S1 - S2)</h3>
+                            <p>Building strong roots in core Sciences, Mathematics, and Languages. Students explore a
+                                wide range of subjects to discover their passions.</p>
+                        </div>
+                    </div>
 
-   <footer class="footer">
+                    <!-- Step 2 -->
+                    <div class="pathway-step">
+                        <div class="pathway-content">
+                            <h3>Focus (S3 - S4)</h3>
+                            <p>Introduction of optional subjects and intensified preparation for UCE examinations.
+                                Practical lab work becomes central.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="pathway-step">
+                        <div class="pathway-content">
+                            <h3>Specialization (S5 - S6)</h3>
+                            <p>Advanced Level studies. Students select specific combinations (Science or Arts) tailored
+                                to their future career goals.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="pathway-step">
+                        <div class="pathway-content">
+                            <h3>University Placement</h3>
+                            <p>Career guidance, university application support, and scholarship recommendations to
+                                ensure the next big step.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Parallax Separator -->
+        <section class="parallax-separator">
+            <div class="overlay"></div>
+            <div class="container" style="position: relative; z-index: 2;">
+                <h2>"Education is the most powerful weapon which you can use to change the world."</h2>
+                <p>— Nelson Mandela</p>
+            </div>
+        </section>
+
+        <section class="curriculum">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Curriculum</h2>
+                    <p>A balanced approach to academic and personal development</p>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="curriculum-tabs">
+                    <button class="tab-btn active" data-tab="olevel">O-Level Subjects</button>
+                    <button class="tab-btn" data-tab="alevel">A-Level Combinations</button>
+                    <button class="tab-btn" data-tab="co-curricular">Co-Curricular</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content active" id="olevel">
+                    <div class="grid">
+                        <div class="subject-card">
+                            <i class="fas fa-flask subject-icon"></i>
+                            <h3>Sciences</h3>
+                            <p>Physics, Chemistry, Biology, Mathematics, Agriculture</p>
+                        </div>
+                        <div class="subject-card">
+                            <i class="fas fa-book subject-icon"></i>
+                            <h3>Arts</h3>
+                            <p>History, Geography, Religious Education, Literature</p>
+                        </div>
+                        <div class="subject-card">
+                            <i class="fas fa-language subject-icon"></i>
+                            <h3>Languages</h3>
+                            <p>English, Luganda, French, Swahili</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="alevel">
+                    <div class="grid">
+                        <div class="subject-card">
+                            <i class="fas fa-atom subject-icon"></i>
+                            <h3>Science Combinations</h3>
+                            <p>PCM, PCB, BCM, PEM (Physics, Chem, Bio, Math)</p>
+                        </div>
+                        <div class="subject-card">
+                            <i class="fas fa-gavel subject-icon"></i>
+                            <h3>Arts Combinations</h3>
+                            <p>HEL, HEG, DEG (History, Eco, Lit, Geo)</p>
+                        </div>
+                        <div class="subject-card">
+                            <i class="fas fa-laptop-code subject-icon"></i>
+                            <h3>Vocational</h3>
+                            <p>ICT, Fine Art, Entrepreneurship, Sub-Math</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="co-curricular">
+                    <div class="grid">
+                        <div class="subject-card">
+                            <i class="fas fa-futbol subject-icon"></i>
+                            <h3>Sports</h3>
+                            <p>Football, Netball, Volleyball, Athletics</p>
+                        </div>
+                        <div class="subject-card">
+                            <i class="fas fa-music subject-icon"></i>
+                            <h3>Clubs</h3>
+                            <p>MDD, Debate, Scripture Union, Writers Club</p>
+                        </div>
+                        <div class="subject-card">
+                            <i class="fas fa-hands-helping subject-icon"></i>
+                            <h3>Service</h3>
+                            <p>Scouts, Girl Guides, Red Cross, Environmental Club</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="programmes">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Programmes</h2>
+                    <p>Comprehensive secondary education focused on excellence and values</p>
+                </div>
+                <div class="grid">
+                    <div class="programme-card">
+                        <h3>Secondary Education</h3>
+                        <p>Both Ordinary Level and Advanced Level classes providing a strong foundation for higher
+                            education.</p>
+                    </div>
+                    <div class="programme-card">
+                        <h3>Ethical Academic Studies</h3>
+                        <p>Academic studies grounded in ethical values, promoting integrity and moral development.</p>
+                    </div>
+                    <div class="programme-card">
+                        <h3>Character Development</h3>
+                        <p>Emphasis on character development, responsible citizenship, and preparing learners for 21st
+                            century challenges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faculty">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Faculty</h2>
+                    <p>Dedicated professionals shaping young minds</p>
+                </div>
+                <div class="grid">
+                    <div class="faculty-card">
+                        <img src="pics/1728209172390.jpeg" alt="Dr. Sarah Johnson" class="faculty-img">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <p style="color: var(--secondary); font-weight: 500;">Head of Science Department</p>
+                        <p style="font-size: 0.9rem; color: var(--text-light);">PhD in Physics</p>
+                    </div>
+                    <div class="faculty-card">
+                        <img src="pics/1728209172390.jpeg" alt="Mr. James Okello" class="faculty-img">
+                        <h3>Mr. James Okello</h3>
+                        <p style="color: var(--secondary); font-weight: 500;">Mathematics Coordinator</p>
+                        <p style="font-size: 0.9rem; color: var(--text-light);">MSc in Applied Mathematics</p>
+                    </div>
+                    <div class="faculty-card">
+                        <img src="pics/1728209172390.jpeg" alt="Ms. Amina Nalwoga" class="faculty-img">
+                        <h3>Ms. Amina Nalwoga</h3>
+                        <p style="color: var(--secondary); font-weight: 500;">Head of Languages</p>
+                        <p style="font-size: 0.9rem; color: var(--text-light);">MA in Linguistics</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="calendar">
+            <div class="container">
+                <div class="section-title">
+                    <h2 style="color: white !important;">Academic Calendar 2024</h2>
+                    <p style="opacity: 0.8 !important;">Key dates and important events</p>
+                </div>
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Event</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jan 15</td>
+                            <td>First Term Begins</td>
+                            <td>Orientation for new students</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 20-22</td>
+                            <td>Mid-Term Exams</td>
+                            <td>All subjects assessment</td>
+                        </tr>
+                        <tr>
+                            <td>Apr 5-15</td>
+                            <td>Sports Week</td>
+                            <td>Inter-house competitions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Contact Us</h3>
-                <p>Location: P.O. BOX 23, Lugazi Municipality, Buikwe District, Uganda (Kampala region).<br>
-                Physical Address: The school is located along the Lugazi - Namengo Road.<br>
-                Phone Numbers: 075 830 5469<br>
-                Email: info@impacthighschoolug.com<br>
-                Office Hours: Mon-Fri 8AM-5PM</p>
+                <p>Location: P.O. BOX 23, Lugazi Municipality, Buikwe District, Uganda.<br>
+                    Physical Address: Along the Lugazi - Namengo Road.<br>
+                    Phone: 075 830 5469<br>
+                    Email: info@impacthighschoolug.com<br>
+                    Hours: Mon-Fri 8AM-5PM</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
@@ -547,29 +492,28 @@
             <div class="footer-section">
                 <h3>Connect With Us</h3>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/p/Impact-high-school-lugazi-100064060272255/"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/impact_high_school_lugazi/"><i class="fab fa-instagram"></i></a>
-                    <a href="https://ug.linkedin.com/company/impact-high-school-lugazi"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/watch?v=IFVZ60-DcK4"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/p/Impact-high-school-lugazi-100064060272255/"
+                        aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/impact_high_school_lugazi/" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://ug.linkedin.com/company/impact-high-school-lugazi" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/watch?v=IFVZ60-DcK4" aria-label="YouTube"><i
+                            class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
+        <div class="text-center" style="opacity: 0.7; font-size: 0.9em;">
+            &copy; <span id="current-year"></span> Impact High School. All rights reserved.
+        </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle from index.html
-        const hamburger = document.querySelector('.hamburger');
-        const nav = document.querySelector('.main-nav');
-
-        hamburger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-    </script>
-
-<script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-<zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cmks0upgf002irzj2km2b9cpo'></zapier-interfaces-chatbot-embed>
-
+    <script src="scripts.js"></script>
+    <script async type='module'
+        src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    <zapier-interfaces-chatbot-embed is-popup='true'
+        chatbot-id='cmks0upgf002irzj2km2b9cpo'></zapier-interfaces-chatbot-embed>
 </body>
+
 </html>

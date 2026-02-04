@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor - Impact High School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .ai-hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: -3rem auto 4rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .chat-header {
+            background: var(--light);
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-header i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: #fcfcfc;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            line-height: 1.5;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: var(--white);
+            border: 1px solid #eee;
+            border-top-left-radius: 5px;
+            color: var(--dark);
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-top-right-radius: 5px;
+        }
+
+        .message-icon {
+            position: absolute;
+            top: -15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .message.bot .message-icon {
+            left: -10px;
+            background: var(--secondary);
+        }
+
+        .message.user .message-icon {
+            right: -10px;
+            background: var(--primary-dark);
+        }
+
+        .chat-input-area {
+            padding: 1.5rem;
+            background: var(--white);
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            outline: none;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .chat-input-area input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--dark);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounce 1s infinite both;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="pics/impactt.png" alt="Impact High School Logo">
+                <span class="logo-text">Impact High School</span>
+            </a>
+            <div class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="academics.html" class="nav-link">Academics</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="learning-hub.html" class="nav-link active">AI Tutor</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <i class="fas fa-bars hamburger" role="button" aria-label="Toggle navigation" tabindex="0"></i>
+        </nav>
+    </header>
+
+    <main>
+        <section class="ai-hero">
+            <div class="container">
+                <h1>Impact AI Tutor</h1>
+                <p>Your 24/7 Personal Study Assistant powered by Gemini</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <h3 style="margin: 0;">Impact Bot</h3>
+                        <p style="margin: 0; font-size: 0.8rem; opacity: 0.7;">Always online</p>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot">
+                        Hello! I'm your AI Tutor. Ask me anything about Mathematics, Science, History, or Literature.
+                        I'm here to help you learn! 📚
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Type your question here..." autocomplete="off">
+                    <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 4rem; opacity: 0.7; font-size: 0.9rem;">
+                <p><i class="fas fa-info-circle"></i> AI can make mistakes. Always check important information.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="text-center" style="opacity: 0.7; font-size: 0.9em; padding: 2rem;">
+            &copy; <span id="current-year"></span> Impact High School. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script src="ai-tutor.js"></script>
+</body>
+
+</html>
