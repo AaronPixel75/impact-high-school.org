@@ -24,35 +24,63 @@ export default async function handler(req) {
             });
         }
 
-        // Call Google Gemini API
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: "You are a helpful school tutor. Context: High School. Keep answers concise and encouraging. Question: " + prompt
-                        }]
-                    }]
-                })
+        // List of models to try (in order of preference/cost)
+        const models = [
+            'gemini-1.5-flash',
+            'gemini-1.5-flash-001',
+            'gemini-1.5-pro',
+            'gemini-1.0-pro',
+            'gemini-pro'
+        ];
+
+        let lastError = null;
+        let successfulResponse = null;
+
+        // Try each model until one works
+        for (const model of models) {
+            try {
+                // console.log(`Attempting model: ${model}`); // Optional debugging
+                const response = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: "You are a helpful school tutor. Context: High School. Keep answers concise and encouraging. Question: " + prompt
+                                }]
+                            }]
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    successfulResponse = data.candidates[0].content.parts[0].text;
+                    break; // Success! Stop looping.
+                } else {
+                    // Capture specific error to help with fallback logic or final reporting
+                    const errorMsg = data.error?.message || response.statusText;
+                    lastError = `Model ${model} failed: ${errorMsg}`;
+                    // Continue to next model...
+                }
+
+            } catch (err) {
+                lastError = `Model ${model} connection error: ${err.message}`;
             }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error?.message || 'Failed to fetch from Google');
         }
 
-        // Extract the text to send back to frontend
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response.";
+        if (successfulResponse) {
+            return new Response(JSON.stringify({ text: successfulResponse }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' },
+            });
+        }
 
-        return new Response(JSON.stringify({ text }), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-        });
+        // If we exhausted all models
+        throw new Error(lastError || "All AI models failed to respond.");
 
     } catch (error) {
         console.error("API Error:", error);
