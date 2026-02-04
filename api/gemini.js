@@ -26,9 +26,10 @@ export default async function handler(req) {
 
         // List of models to try (in order of preference/cost)
         const models = [
-            'gemini-1.5-flash-latest',
-            'gemini-1.5-pro-latest',
-            'gemini-pro'
+            'gemini-2.5-flash-lite',
+            'gemini-2.0-flash-lite',
+            'gemini-2.5-flash',
+            'gemini-2.0-flash'
         ];
 
         let lastError = null;
